@@ -2,15 +2,22 @@
   "authors": [ "Phil Oyston" ],
   "buildOptions": {
     "xmlDoc": false,
-    "warningsAsErrors": true
-  },
-  "dependencies": {
-    "NEST": "5.0.0",
-    "NETStandard.Library": "1.6.1"
+    "warningsAsErrors": true,
+    "compile": [
+      "../VersionAssemblyInfo.cs"
+    ]
   },
   "description": "Provides a mechanism to interact with Elasticsearch via a query object pattern",
   "frameworks": {
     "netstandard1.3": {
+      "dependencies": {
+        "NEST": "5.0.0"
+      }
+    },
+    "net45": {
+      "dependencies": {
+        "NEST": "5.0.0"
+      }
     }
   },
   "packOptions": {
