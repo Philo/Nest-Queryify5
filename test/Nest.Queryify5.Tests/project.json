@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "FluentAssertions": "4.18.0",
+    "NEST": "5.0.0",
+    "NETStandard.Library": "1.6.1",
+    "xunit": "2.2.0-beta4-build3444"
+  },
+
+  "frameworks": {
+    "netstandard1.3": {
+      "imports": "dnxcore50"
+    }
+  }
+}
