@@ -1,8 +1,23 @@
 {
-  "version": "5.0.0-*",
   "authors": [ "Phil Oyston" ],
+  "buildOptions": {
+    "xmlDoc": false,
+    "warningsAsErrors": true
+  },
+  "dependencies": {
+    "NEST": "5.0.0",
+    "NETStandard.Library": "1.6.1"
+  },
   "description": "Provides a mechanism to interact with Elasticsearch via a query object pattern",
+  "frameworks": {
+    "netstandard1.3": {
+    }
+  },
   "packOptions": {
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
     "copyright": "Storm ID Ltd",
     "owners": [ "Phil Oyston" ],
     "licenseUrl": "https://github.com/stormid/Nest-Queryify/blob/master/LICENSE",
@@ -11,17 +26,5 @@
     "requireLicenseAcceptance": false,
     "summary": "Elasticsearch NEST query pattern extensions"
   },
-  "buildOptions": {
-    "xmlDoc": false,
-    "warningsAsErrors": true
-  },  
-  "dependencies": {
-    "NEST": "5.0.0",
-    "NETStandard.Library": "1.6.1"
-  },
-
-  "frameworks": {
-    "netstandard1.3": {
-    } 
-  }
+  "title": "Nest-Queryify"
 }
