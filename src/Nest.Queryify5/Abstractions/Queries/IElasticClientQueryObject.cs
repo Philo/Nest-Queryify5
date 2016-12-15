@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Nest.Queryify5.Exceptions;
+using Nest.Queryify.Exceptions;
 
-namespace Nest.Queryify5.Abstractions.Queries
+namespace Nest.Queryify.Abstractions.Queries
 {
     public interface IElasticClientQueryObject<TResponse> where TResponse : class
     {

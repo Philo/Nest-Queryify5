@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Nest.Queryify5.Abstractions.Queries;
+using Nest.Queryify.Abstractions.Queries;
 
-namespace Nest.Queryify5.Extensions
+namespace Nest.Queryify
 {
     public static class ElasticClientQueryExtensions
     {

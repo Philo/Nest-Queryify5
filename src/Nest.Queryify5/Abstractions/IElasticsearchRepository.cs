@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Nest.Queryify5.Abstractions.Queries;
+using Nest.Queryify.Abstractions.Queries;
 
-namespace Nest.Queryify5.Abstractions
+namespace Nest.Queryify.Abstractions
 {
     public interface IElasticsearchRepository : IElasticsearchRepositoryAsync
     {

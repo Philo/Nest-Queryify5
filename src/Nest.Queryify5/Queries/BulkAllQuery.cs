@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest.Queryify5.Abstractions.Queries;
+using Nest.Queryify.Abstractions.Queries;
 
-namespace Nest.Queryify5.Queries
+namespace Nest.Queryify.Queries
 {
     public class BulkAllQuery<T> : ElasticClientQueryObject<BulkAllObservable<T>> where T : class
     {

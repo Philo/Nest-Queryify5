@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Nest.Queryify5.Abstractions.Queries;
+using Nest.Queryify.Abstractions.Queries;
 
-namespace Nest.Queryify5.Queries
+namespace Nest.Queryify.Queries
 {
     public abstract class MoreLikeThisQuery<T> : SearchQueryObject<T>
 		where T : class

@@ -20,18 +20,5 @@
       }
     }
   },
-  "packOptions": {
-    "repository": {
-      "type": "git",
-      "url": ""
-    },
-    "copyright": "Storm ID Ltd",
-    "owners": [ "Phil Oyston" ],
-    "licenseUrl": "https://github.com/stormid/Nest-Queryify/blob/master/LICENSE",
-    "projectUrl": "https://github.com/stormid/Nest-Queryify",
-    "iconUrl": "http://stormid.com/_/images/icons/apple-touch-icon.png",
-    "requireLicenseAcceptance": false,
-    "summary": "Elasticsearch NEST query pattern extensions"
-  },
-  "title": "Nest-Queryify"
+  "title": "Nest-Queryify5"
 }

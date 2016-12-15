@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Nest.Queryify5.Queries.Common
+namespace Nest.Queryify.Queries.Common
 {
     public class FindByIdQuery<T> : DocumentPathQuery<T, T> where T : class
     {

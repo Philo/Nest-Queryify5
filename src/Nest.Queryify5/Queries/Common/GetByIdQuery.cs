@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Nest.Queryify5.Abstractions.Queries;
+using Nest.Queryify.Abstractions.Queries;
 
-namespace Nest.Queryify5.Queries.Common
+namespace Nest.Queryify.Queries.Common
 {
     public class GetByIdQuery<T> : ElasticClientQueryObject<IGetResponse<T>> where T : class
     {

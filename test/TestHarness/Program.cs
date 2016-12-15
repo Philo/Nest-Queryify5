@@ -3,11 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
-using Nest.Queryify5;
-using Nest.Queryify5.Abstractions.Queries;
-using Nest.Queryify5.Extensions;
-using Nest.Queryify5.Queries;
-using Nest.Queryify5.Queries.Common;
 
 namespace TestHarness
 {

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Nest.Queryify5.Abstractions.Queries
+namespace Nest.Queryify.Abstractions.Queries
 {
 	public abstract class SearchDescriptorQuery<TDocument> : SearchQueryObject<TDocument>
 		where TDocument : class

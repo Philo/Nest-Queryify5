@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest.Queryify5.Abstractions;
-using Nest.Queryify5.Abstractions.Queries;
-using Nest.Queryify5.Extensions;
-using Nest.Queryify5.Queries;
-using Nest.Queryify5.Queries.Common;
+using Nest.Queryify.Abstractions;
+using Nest.Queryify.Abstractions.Queries;
+using Nest.Queryify.Queries;
+using Nest.Queryify.Queries.Common;
 
-namespace Nest.Queryify5
+namespace Nest.Queryify
 {
     public partial class ElasticsearchRepository
     {

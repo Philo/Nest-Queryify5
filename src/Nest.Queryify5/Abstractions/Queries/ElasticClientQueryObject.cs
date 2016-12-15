@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest.Queryify5.Exceptions;
+using Nest.Queryify.Exceptions;
 
-namespace Nest.Queryify5.Abstractions.Queries
+namespace Nest.Queryify.Abstractions.Queries
 {
     [DebuggerStepThrough]
     public abstract class ElasticClientQueryObject<TResponse> : IElasticClientQueryObject<TResponse> where TResponse : class

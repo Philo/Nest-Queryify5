@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace Nest.Queryify5.Queries.Common
+namespace Nest.Queryify.Queries.Common
 {
     public class DeleteByIdQuery<T> : DocumentPathQuery<T, IDeleteResponse> where T : class
     {

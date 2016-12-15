@@ -1,6 +1,6 @@
 using System;
 
-namespace Nest.Queryify5.Exceptions
+namespace Nest.Queryify.Exceptions
 {
     public class ElasticsearchException : Exception
     {
