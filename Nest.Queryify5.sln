@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nest.Queryify5", "src\Nest.Queryify5\Nest.Queryify5.xproj", "{AD95514C-EA0A-48BA-B48D-4D8C78B78DFE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{72DB19E3-DB5F-4D94-AC72-0813F4CB43DF}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestHarness", "test\TestHarness\TestHarness.xproj", "{6F0F054C-A566-4D43-8FF4-7B744BEE191A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,16 +23,11 @@ Global
 		{AD95514C-EA0A-48BA-B48D-4D8C78B78DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD95514C-EA0A-48BA-B48D-4D8C78B78DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD95514C-EA0A-48BA-B48D-4D8C78B78DFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F0F054C-A566-4D43-8FF4-7B744BEE191A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F0F054C-A566-4D43-8FF4-7B744BEE191A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F0F054C-A566-4D43-8FF4-7B744BEE191A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F0F054C-A566-4D43-8FF4-7B744BEE191A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AD95514C-EA0A-48BA-B48D-4D8C78B78DFE} = {1F8FD49A-5E87-40DC-9B1B-D88F99C79E5D}
-		{6F0F054C-A566-4D43-8FF4-7B744BEE191A} = {72DB19E3-DB5F-4D94-AC72-0813F4CB43DF}
 	EndGlobalSection
 EndGlobal

@@ -8,6 +8,16 @@ var versionAssemblyInfo = Argument("versionAssemblyInfo", "src/VersionAssemblyIn
 var targetFrameworks    = Argument("target-frameworks", "netstandard1.3,net45");
 GitVersion versionInfo  = null;
 
+var targets             = targetFrameworks.Split(',');
+
+Setup(ctx => {
+    
+});
+
+Task("Clean").Does(() => {
+    CleanDirectories(artifacts);
+});
+
 Task("Create-Version-Info")
     .WithCriteria(() => !FileExists(versionAssemblyInfo))
     .Does(() =>
@@ -56,61 +66,79 @@ Task("Update-AppVeyor-Build-Number")
     AppVeyor.UpdateBuildVersion(versionInfo.FullSemVer +".build." +AppVeyor.Environment.Build.Number);
 });
 
+Task("Nuget-Restore").Does(() => DotNetCoreRestore("src/Nest.Queryify5/"));
+
+Task("Build")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Update-Version-Info")
+    .IsDependentOn("Nuget-Restore")
+    .Does(() => {
+
+    foreach(var target in targets) {
+        var output = Directory(buildOutput.ToString() +"/" +target);
+        Information("Building for TargetFramework [{0}] to {1}", target, output);
+        EnsureDirectoryExists(output);
+
+        var buildSettings = new DotNetCoreBuildSettings() {
+            Configuration = configuration,
+            NoIncremental = true,
+            OutputDirectory = output,
+            Framework = target
+        };
+
+        DotNetCoreBuild("src/Nest.Queryify5/", buildSettings);
+    }
+});
+
+Task("Pack")
+    .Does(() => {
+
+    var nugetFiles = new List<NuSpecContent>();
+    var nugetDependencies = new List<NuSpecDependency>();
+
+    foreach(var target in targets) {
+        var output = Directory(buildOutput.ToString() +"/" +target);
+        Information("Collecting files for TargetFramework [{0}] to {1}", target, output);
+        EnsureDirectoryExists(output);
+
+        nugetFiles.AddRange(new [] {
+            new NuSpecContent { Source = File(output.ToString() +"/Nest.Queryify5.dll"), Target = "lib/" +target },
+            new NuSpecContent { Source = File(output.ToString() +"/Nest.Queryify5.pdb"), Target = "lib/" +target }
+        });
+
+        nugetDependencies.AddRange(new [] {
+            new NuSpecDependency { Id = "Nest", Version = "[5,6]", TargetFramework=target },
+        });
+    }
+
+    Information("Packing {0} files for {1} target frameworks", nugetFiles.Count(), targets.Count());
+
+    var settings = new NuGetPackSettings {
+        Id = "Nest.Queryify5",
+        Authors = new [] { "Phil Oyston" },
+        Owners = new [] {"Phil Oyston", "Storm ID" },
+        Description = "Provides a mechanism to interact with Elasticsearch via a query object pattern",
+        LicenseUrl = new Uri("https://raw.githubusercontent.com/stormid/nest-queryify/master/LICENSE"),
+        ProjectUrl = new Uri("https://github.com/stormid/nest-queryify"),
+        IconUrl = new Uri("http://stormid.com/_/images/icons/apple-touch-icon.png"),
+        RequireLicenseAcceptance = false,
+        Properties = new Dictionary<string, string> { { "Configuration", configuration }},
+        Symbols = false,
+        NoPackageAnalysis = true,
+        Version = versionInfo.NuGetVersionV2,
+        OutputDirectory = artifacts,
+        Tags = new[] { "Elasticsearch", "Nest", "Storm" },
+        Files = nugetFiles,
+        Dependencies = nugetDependencies
+    };
+    NuGetPack("Nest.Queryify.nuspec", settings);
+});
 
 Task("Default")
-    .IsDependentOn("Update-Version-Info")
-    .Does(() => {
-        DotNetCoreRestore("src/Nest.Queryify5/");
+    .IsDependentOn("Build");
 
-        var targets = targetFrameworks.Split(',');
-        var nugetFiles = new List<NuSpecContent>();
-        var nugetDependencies = new List<NuSpecDependency>();
-
-        foreach(var target in targets) {
-            var output = Directory(buildOutput.ToString() +"/" +target);
-            Information("Building for TargetFramework [{0}] to {1}", target, output);
-            EnsureDirectoryExists(output);
-
-            var buildSettings = new DotNetCoreBuildSettings() {
-                Configuration = configuration,
-                NoIncremental = true,
-                OutputDirectory = output,
-                Framework = target
-            };
-
-            DotNetCoreBuild("src/Nest.Queryify5/", buildSettings);
-
-            nugetFiles.AddRange(new [] {
-                new NuSpecContent { Source = File(output.ToString() +"/Nest.Queryify5.dll"), Target = "lib/" +target },
-                new NuSpecContent { Source = File(output.ToString() +"/Nest.Queryify5.pdb"), Target = "lib/" +target }
-            });
-
-            nugetDependencies.AddRange(new [] {
-                new NuSpecDependency { Id = "Nest", Version = "[5,6]", TargetFramework=target },
-            });
-        }
-
-        var settings = new NuGetPackSettings {
-            Id = "Nest.Queryify",
-            Authors = new [] { "Phil Oyston" },
-            Owners = new [] {"Phil Oyston", "Storm ID" },
-            Description = "Provides a mechanism to interact with Elasticsearch via a query object pattern",
-            LicenseUrl = new Uri("https://raw.githubusercontent.com/stormid/nest-queryify/master/LICENSE"),
-            ProjectUrl = new Uri("https://github.com/stormid/nest-queryify"),
-            IconUrl = new Uri("http://stormid.com/_/images/icons/apple-touch-icon.png"),
-            RequireLicenseAcceptance = false,
-            Properties = new Dictionary<string, string> { { "Configuration", configuration }},
-            Symbols = false,
-            NoPackageAnalysis = true,
-            Version = versionInfo.NuGetVersionV2,
-            OutputDirectory = artifacts,
-            Tags = new[] { "Elasticsearch", "Nest", "Storm" },
-            Files = nugetFiles,
-            Dependencies = nugetDependencies
-        };
-        NuGetPack("Nest.Queryify.nuspec", settings);            
-        
-    });
-
+Task("Ci")
+    .IsDependentOn("Default")
+    .IsDependentOn("Pack");
 
 RunTarget(target);

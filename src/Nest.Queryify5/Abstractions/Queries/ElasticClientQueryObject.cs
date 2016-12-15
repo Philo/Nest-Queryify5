@@ -9,14 +9,14 @@ namespace Nest.Queryify.Abstractions.Queries
     [DebuggerStepThrough]
     public abstract class ElasticClientQueryObject<TResponse> : IElasticClientQueryObject<TResponse> where TResponse : class
     {
-	    public TResponse Execute(IElasticClient client, string index)
+	    public TResponse Execute(IElasticClient client, string index = null)
 	    {
-	        return WrapQueryResponse(() => ExecuteCore(client, index));
+	        return WrapQueryResponse(() => ExecuteCore(client, index ?? client.ConnectionSettings.DefaultIndex));
 	    }
 
-        public Task<TResponse> ExecuteAsync(IElasticClient client, string index)
+        public Task<TResponse> ExecuteAsync(IElasticClient client, string index = null)
         {
-            return WrapQueryResponse(() => ExecuteCoreAsync(client, index));
+            return WrapQueryResponse(() => ExecuteCoreAsync(client, index ?? client.ConnectionSettings.DefaultIndex));
         }
 
         protected abstract TResponse ExecuteCore(IElasticClient client, string index);
