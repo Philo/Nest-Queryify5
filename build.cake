@@ -114,7 +114,7 @@ Task("Pack")
         });
     }
 
-    Information("Packing {0} files for {1} target frameworks", nugetFiles.Count(), targets.Count());
+    Information("Packing {0} files for {1} target frameworks [Version: {2}]", nugetFiles.Count(), targets.Count(), versionInfo.NuGetVersionV2);
 
     var settings = new NuGetPackSettings {
         Id = "Nest.Queryify5",
