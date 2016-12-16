@@ -48,14 +48,17 @@ Task("Update-Version-Info")
 });
 
 Task("Upload-AppVeyor-Artifacts")
+    .IsDependentOn("Pack")
     .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
 {
-    // var serviceArtifact = MakeAbsolute(File(artifacts.ToString() +@"\service\" +serviceProject +".zip"));
-
-    // if(FileExists(serviceArtifact)) {
-    //     AppVeyor.UploadArtifact(serviceArtifact);
-    // }
+    var nupkgFiles = System.IO.Directory.EnumerateFiles(artifacts.ToString(), "*.nupkg").ToList();
+    
+    foreach(var nupkg in nupkgFiles) {
+        if(FileExists(nupkg)) {
+            AppVeyor.UploadArtifact(nupkg);
+        }
+    }
 });
 
 Task("Update-AppVeyor-Build-Number")
@@ -137,8 +140,10 @@ Task("Pack")
 Task("Default")
     .IsDependentOn("Build");
 
-Task("Ci")
+Task("CI")
+    .IsDependentOn("Update-AppVeyor-Build-Number")
     .IsDependentOn("Default")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Pack")
+    .IsDependentOn("Upload-AppVeyor-Artifacts");
 
 RunTarget(target);
